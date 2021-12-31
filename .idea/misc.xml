@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/AndroidProject/TodoList/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.3828125" />
+        <entry key="..\:/AndroidProject/TodoList/app/src/main/res/drawable-xxhdpi/ic_notes_logo.xml" value="0.221875" />
+        <entry key="..\:/AndroidProject/TodoList/app/src/main/res/drawable/bg_edt_tugas_baru.xml" value="0.3828125" />
+        <entry key="..\:/AndroidProject/TodoList/app/src/main/res/drawable/bg_gradient.xml" value="0.3828125" />
+        <entry key="..\:/AndroidProject/TodoList/app/src/main/res/drawable/ic_add_alarm.xml" value="0.3828125" />
+        <entry key="..\:/AndroidProject/TodoList/app/src/main/res/drawable/ic_alarm_off.xml" value="0.3828125" />
+        <entry key="..\:/AndroidProject/TodoList/app/src/main/res/drawable/ic_launcher_background.xml" value="0.3828125" />
+        <entry key="..\:/AndroidProject/TodoList/app/src/main/res/drawable/ic_notes.xml" value="0.3828125" />
+        <entry key="..\:/AndroidProject/TodoList/app/src/main/res/drawable/ic_notes_launcher_background.xml" value="0.3828125" />
+        <entry key="..\:/AndroidProject/TodoList/app/src/main/res/drawable/ic_notes_launcher_foreground.xml" value="0.3828125" />
+        <entry key="..\:/AndroidProject/TodoList/app/src/main/res/drawable/ic_notes_logo.xml" value="0.3828125" />
+        <entry key="..\:/AndroidProject/TodoList/app/src/main/res/drawable/splash_background.xml" value="2.1" />
+        <entry key="..\:/AndroidProject/TodoList/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/AndroidProject/TodoList/app/src/main/res/layout/activity_main2.xml" value="0.36666666666666664" />
+        <entry key="..\:/AndroidProject/TodoList/app/src/main/res/layout/activity_splash.xml" value="0.20572916666666666" />
+        <entry key="..\:/AndroidProject/TodoList/app/src/main/res/layout/activity_splash_screen.xml" value="0.36666666666666664" />
+        <entry key="..\:/AndroidProject/TodoList/app/src/main/res/layout/activity_test.xml" value="0.36666666666666664" />
+        <entry key="..\:/AndroidProject/TodoList/app/src/main/res/layout/baris_pada_daftar_tugas.xml" value="0.25" />
+        <entry key="..\:/AndroidProject/TodoList/app/src/main/res/layout/content_splash_screen.xml" value="0.36666666666666664" />
+        <entry key="..\:/AndroidProject/TodoList/app/src/main/res/layout/detail_tugas_view.xml" value="0.25" />
+        <entry key="..\:/AndroidProject/TodoList/app/src/main/res/layout/fragment_second.xml" value="0.36666666666666664" />
+        <entry key="..\:/AndroidProject/TodoList/app/src/main/res/layout/item_tugas_view.xml" value="0.4369668246445498" />
+        <entry key="..\:/AndroidProject/TodoList/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.3828125" />
+        <entry key="..\:/AndroidProject/TodoList/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.3828125" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
