@@ -88,7 +88,7 @@ public class DetailTugasActivity extends AppCompatActivity {
 
         Intent intent = new Intent(this, TugasBroadcastReceiver.class);
         intent.putExtra("nama_tugas", tugasDipilih.getNamaTugas());
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, Math.round(tugasDipilih.getId()), intent, PendingIntent.FLAG_UPDATE_CURRENT);
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
     }
