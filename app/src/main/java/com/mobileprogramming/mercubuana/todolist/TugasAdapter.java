@@ -13,8 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.mobileprogramming.mercubuana.todolist.model.Tugas;
 import com.bumptech.glide.Glide;
+import com.mobileprogramming.mercubuana.todolist.model.Tugas;
 
 import java.util.ArrayList;
 

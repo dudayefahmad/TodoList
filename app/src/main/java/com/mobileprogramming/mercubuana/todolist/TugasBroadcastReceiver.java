@@ -1,33 +1,53 @@
 package com.mobileprogramming.mercubuana.todolist;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.media.RingtoneManager;
+import android.net.Uri;
+import android.os.Build;
 
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
 public class TugasBroadcastReceiver extends BroadcastReceiver {
 
-    private int ID_NOTIICATION = 123;
-
     @Override
     public void onReceive(Context context, Intent intent) {
-        Intent i = new Intent(context, MainActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, i, 0);
+        Uri alarmsound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
 
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, "tugas_notification")
-                .setSmallIcon(R.drawable.ic_notes_launcher_foreground)
-                .setContentTitle("Tugas Title")
-                .setContentText("Tugas Deskripsi")
-                .setAutoCancel(true)
-                .setDefaults(NotificationCompat.DEFAULT_ALL)
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setContentIntent(pendingIntent);
+        Intent intent1 = new Intent(context, MainActivity.class);
+        intent1.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
-        notificationManagerCompat.notify(ID_NOTIICATION, builder.build());
+        TaskStackBuilder taskStackBuilder = TaskStackBuilder.create(context);
+        taskStackBuilder.addParentStack(MainActivity.class);
+        taskStackBuilder.addNextIntent(intent1);
+
+        PendingIntent intent2 = taskStackBuilder.getPendingIntent(1, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context);
+
+        NotificationChannel channel = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            channel = new NotificationChannel("TugasChannel", "tugas", NotificationManager.IMPORTANCE_HIGH);
+        }
+
+        Notification notification = builder.setContentTitle("Reminder Tugas")
+                .setContentText(intent.getStringExtra("nama_tugas")).setAutoCancel(true)
+                .setSound(alarmsound).setSmallIcon(R.mipmap.ic_notes_launcher_round)
+                .setContentIntent(intent2)
+                .setChannelId("TugasChannel")
+                .build();
+
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            notificationManager.createNotificationChannel(channel);
+        }
+        notificationManager.notify(1, notification);
     }
 }

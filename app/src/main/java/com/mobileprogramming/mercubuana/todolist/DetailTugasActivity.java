@@ -5,6 +5,8 @@ import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.MotionEvent;
@@ -15,12 +17,12 @@ import android.widget.TimePicker;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.mobileprogramming.mercubuana.todolist.model.Tugas;
 import com.google.android.material.textfield.TextInputEditText;
+import com.mobileprogramming.mercubuana.todolist.model.Tugas;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Locale;
+import java.util.Date;
 
 public class DetailTugasActivity extends AppCompatActivity {
 
@@ -29,11 +31,6 @@ public class DetailTugasActivity extends AppCompatActivity {
 
     TextInputEditText edtNamaTugas, edtTanggalTugas, edtJamTugas;
     Button btnSaveTugas;
-    DatePickerDialog datePickerDialog;
-    TimePickerDialog timePickerDialog;
-    SimpleDateFormat dateFormatter;
-    private AlarmManager alarmManager;
-    private PendingIntent pendingIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,19 +68,30 @@ public class DetailTugasActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 rekamDataTugas();
-                //TODO: Save date and time for reminder notification
-//                setAlarmForNotification()
+                try {
+                    setAlarmForNotification();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
                 finish();
             }
         });
     }
 
-//    private void setAlarmForNotification() {
-//        alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-//        Intent intent = new Intent(this, TugasBroadcastReceiver.class);
-//        pendingIntent = PendingIntent.getBroadcast(this, 0, intent, 0);
-//        alarmManager.setInexactRepeating(AlarmManager.RTC_WAKEUP);
-//    }
+    private void setAlarmForNotification() throws Exception {
+        String tglWaktuTugas = tugasDipilih.getTanggalTugas() + " " + tugasDipilih.getJamTugas();
+        SimpleDateFormat formatDateTugas = new SimpleDateFormat("dd-MMM-yyyy HH:mm");
+        Date dateTugas = formatDateTugas.parse(tglWaktuTugas);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(dateTugas);
+        calendar.set(Calendar.SECOND, 0);
+
+        Intent intent = new Intent(this, TugasBroadcastReceiver.class);
+        intent.putExtra("nama_tugas", tugasDipilih.getNamaTugas());
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 1, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
+    }
 
     private void rekamDataTugas() {
         tugasDipilih.setNamaTugas(edtNamaTugas.getText().toString());
@@ -95,7 +103,7 @@ public class DetailTugasActivity extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance();
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int minute = calendar.get(Calendar.MINUTE);
-        timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int selectedHour, int selectedMinute) {
                 edtJamTugas.setText(String.format("%02d:%02d", selectedHour, selectedMinute));
@@ -105,10 +113,9 @@ public class DetailTugasActivity extends AppCompatActivity {
     }
 
     private void showDateDialog() {
-        Locale id = new Locale("in", "ID");
-        dateFormatter = new SimpleDateFormat("EEEE dd-MM-yyy", id);
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MMM-yyyy");
         Calendar newCalendar = Calendar.getInstance();
-        datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 Calendar newDate = Calendar.getInstance();
@@ -127,16 +134,4 @@ public class DetailTugasActivity extends AppCompatActivity {
         btnSaveTugas = findViewById(R.id.btnSaveTugas);
     }
 
-//    private void createNotificationChannel() {
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-//            CharSequence name = "tugas_reminder_channel";
-//            String description = "Channel for tugas notification";
-//            int importance = NotificationManager.IMPORTANCE_HIGH;
-//            NotificationChannel channel = new NotificationChannel("tugas_notification", name, importance);
-//            channel.setDescription(description);
-//
-//            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-//            notificationManager.createNotificationChannel(channel);
-//        }
-//    }
 }

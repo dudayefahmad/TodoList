@@ -95,8 +95,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void lengkapiDataTugas(int position, Tugas namaTugasDicari) {
         Intent formDetailDataTugas = new Intent(this, DetailTugasActivity.class);
-//        Bundle bundle = new Bundle();
-//        formDetailDataTugas.putExtra("namaTugasDicari", (Parcelable) namaTugasDicari);
         dataGlobal.tugasDipilih = dataGlobal.daftarTugas.get(position);
         resultLauncher.launch(formDetailDataTugas);
     }
@@ -151,35 +149,4 @@ public class MainActivity extends AppCompatActivity {
         InputMethodManager inputMethodManager = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(v.getApplicationWindowToken(), 0);
     }
-
-    //    private void rekamDataTanpaDatabase() {
-//        try {
-//            FileOutputStream fos = openFileOutput("datatugas", Context.MODE_PRIVATE);
-//            ObjectOutputStream oos = new ObjectOutputStream(fos);
-//            oos.writeObject(DataGlobal.getInstance().daftarTugas);
-//            oos.close();
-//            fos.close();
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
-//    private void bacaDataTanpaDatabase() {
-//        try {
-//            FileInputStream fis = openFileInput("datatugas");
-//            ObjectInputStream ois = new ObjectInputStream(fis);
-//            DataGlobal.getInstance().daftarTugas = (ArrayList<Tugas>) ois.readObject();
-//            ois.close();
-//            fis.close();
-//            updateTampilanListView();
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        } catch (ClassNotFoundException e) {
-//            e.printStackTrace();
-//        }
-//    }
 }
